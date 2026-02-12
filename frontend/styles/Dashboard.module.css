@@ -1,0 +1,1522 @@
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  background: 
+     
+    repeating-linear-gradient(
+  0deg,
+  transparent,
+  transparent 30px,
+  rgba(255, 255, 255, 0.08) 30px,
+  rgba(255, 255, 255, 0.08) 31px
+  ),
+  linear-gradient(135deg, #0a1628 0%, #03284f 50%, #051e3e 100%);
+   
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background effects */
+.container::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -200px;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.3) 0%,
+    rgba(99, 102, 241, 0.15) 25%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: floatOrb1 20s ease-in-out infinite;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -150px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.25) 0%,
+    rgba(139, 92, 246, 0.1) 25%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: floatOrb2 18s ease-in-out infinite;
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+/* =========================
+   MOBILE MENU BUTTON
+   ========================= */
+
+.mobileMenuButton {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.mobileMenuButton:hover {
+  background: rgba(99, 102, 241, 0.3);
+  transform: scale(1.05);
+}
+
+/* =========================
+   SIDEBAR
+   ========================= */
+
+.sidebar {
+  width: 280px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 100;
+}
+
+.sidebarHeader {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.sidebarTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sidebarEmail {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #6366f1;
+  transform: scaleY(0);
+  transition: transform 0.3s;
+}
+
+.navLink:hover {
+  background: rgba(99, 102, 241, 0.1);
+  color: #e0e7ff;
+  transform: translateX(4px);
+}
+
+.navLinkActive {
+  background: rgba(99, 102, 241, 0.2);
+  color: white;
+}
+
+.navLinkActive::before {
+  transform: scaleY(1);
+}
+
+.navIcon {
+  font-size: 1.25rem;
+  min-width: 24px;
+}
+
+.badge {
+  margin-left: auto;
+  background: rgba(99, 102, 241, 0.3);
+  padding: 0.25rem 0.625rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* =========================
+   VIEW TOGGLE
+   ========================= */
+
+.viewToggle {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.viewToggle button {
+  flex: 1;
+  padding: 0.625rem;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.viewToggleActive {
+  background: #6366f1 !important;
+  color: white !important;
+}
+
+/* =========================
+   LOGOUT BUTTON
+   ========================= */
+
+.logoutButton {
+  margin-top: auto;
+  padding: 0.875rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.logoutButton:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contentWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.addButton {
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.refreshButton {
+  padding: 0.875rem 1.2rem;
+  background: linear-gradient(135deg, #4b5563, #6b7280);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(75, 85, 99, 0.3);
+  margin-right: 0.5rem;
+}
+
+.refreshButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(75, 85, 99, 0.4);
+  background: linear-gradient(135deg, #374151, #4b5563);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* =========================
+   ERROR MESSAGE
+   ========================= */
+
+.error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fecaca;
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideDown 0.3s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+.errorButton {
+  background: none;
+  border: none;
+  color: #fecaca;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.5rem;
+  transition: transform 0.2s;
+}
+
+.errorButton:hover {
+  transform: scale(1.2);
+}
+
+/* =========================
+   TASK GRID
+   ========================= */
+
+.taskGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+/* Add New Task Card */
+.addCard {
+  padding: 2rem 1.25rem;
+  border: 2px dashed rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.05);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 140px;
+}
+
+.addCard:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+}
+
+.addCardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+  transition: transform 0.3s;
+}
+
+.addCard:hover .addCardIcon {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.addCardText {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* =========================
+   LOADING & EMPTY STATES
+   ========================= */
+
+.loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: #94a3b8;
+  font-size: 1.125rem;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.emptyStateText {
+  color: #64748b;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* =========================
+   CALENDAR VIEW
+   ========================= */
+
+.calendar {
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.calendarMonth {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.calendarNav {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(99, 102, 241, 0.2);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+
+.calendarNav:hover {
+  background: rgba(99, 102, 241, 0.3);
+  transform: scale(1.1);
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.calendarDayHeader {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.calendarCell {
+  min-height: 100px;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.6);
+  transition: background 0.3s;
+}
+
+.calendarCell:hover {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.calendarCell.empty {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.calendarCell.today {
+  background: rgba(99, 102, 241, 0.15);
+  border: 2px solid #6366f1;
+}
+
+.calendarDate {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.calendarTasks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.calendarTask {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #1f2937;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendarMore {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+/* =========================
+   MODAL
+   ========================= */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modalContent {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.modalContent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(99, 102, 241, 0.08),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+/* =========================
+   DELETED TASKS MODAL
+   ========================= */
+
+.deletedModal {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.deletedModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.deletedModalHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modalClose {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #2D3748; /* Dark gray color */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: all 0.3s;
+  font-weight: normal;
+}
+
+.modalClose:hover {
+  color: #4A5568; /* Slightly darker on hover */
+  transform: scale(1.1);
+}
+
+.deletedList {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deletedItem {
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s;
+}
+
+.deletedItem:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.deletedItem h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: #e2e8f0;
+}
+
+.deletedItem p {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.deletedItem small {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.deletedActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.restoreButton {
+  padding: 0.5rem 1rem;
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.restoreButton:hover {
+  background: rgba(34, 197, 94, 0.3);
+  transform: translateY(-2px);
+}
+
+.permanentDeleteButton {
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.permanentDeleteButton:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   REDIRECT MESSAGE
+   ========================= */
+
+.redirectMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.redirectLink {
+  color: #818cf8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.redirectLink:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floatOrb1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+
+@keyframes floatOrb2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-40px, 30px) scale(1.15);
+  }
+  66% {
+    transform: translate(25px, -25px) scale(0.85);
+  }
+}
+
+/* =========================
+   CHAT INTERFACE STYLES
+   ========================= */
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 30px,
+      rgba(255, 255, 255, 0.08) 30px,
+      rgba(255, 255, 255, 0.08) 31px
+    ),
+    linear-gradient(135deg, #0a1628 0%, #03284f 50%, #051e3e 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* =========================
+   STICKY NOTE PAD STYLING
+   ========================= */
+
+.chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: calc(100vh - 200px);
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.headerLeft h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: calc(100vh - 200px);
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.userMessage {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #5B4FE9, #7C3AED);
+  border: 1px solid #7C3AED;
+  border-radius: 16px 16px 4px 16px;
+  color: #F8FAFC; /* Lighter text for better contrast */
+}
+
+.assistantMessage {
+  align-self: flex-start;
+  background: linear-gradient(135deg, #334155, #475569);
+  border: 1px solid #475569;
+  border-radius: 16px 16px 16px 4px;
+  color: #F8FAFC; /* Lighter text for better contrast */
+}
+
+.toolMessage {
+  align-self: flex-start;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 16px;
+}
+
+.messageContent {
+  padding: 1rem;
+}
+
+.messageText {
+  line-height: 1.5;
+  word-wrap: break-word;
+  font-weight: 500; /* Slightly bolder text for better visibility */
+}
+
+.toolCalls {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toolCall {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.toolCall strong {
+  color: #a5b4fc;
+}
+
+.messageTimestamp {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: right;
+  padding: 0.25rem 0.75rem 0.75rem 0.75rem;
+}
+
+.welcomeMessage {
+  text-align: center;
+  padding: 2rem;
+  color: #e2e8f0; /* Lighter color for better visibility */
+}
+
+.welcomeMessage h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+}
+
+.welcomeMessage p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #94a3b8;
+}
+
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.suggestions div {
+  padding: 1rem;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+  color: #e2e8f0; /* Lighter text for better visibility */
+}
+
+.suggestions div:hover {
+  background: rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+.typingIndicator {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.typingIndicator span {
+  width: 8px;
+  height: 8px;
+  background: #e2e8f0; /* Lighter color for better visibility */
+  border-radius: 50%;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typingIndicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingIndicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+.chatInputArea {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  align-items: flex-end;
+}
+
+.chatInput {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+  resize: none;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  max-height: 120px;
+  min-height: 44px;
+}
+
+.chatInput:focus {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.sendButton {
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.sendButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.disabledButton {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive adjustments for chat interface */
+@media (max-width: 768px) {
+  .chatContainer {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    height: calc(100vh - 4rem);
+  }
+
+  .message {
+    max-width: 90%;
+  }
+
+  .chatInputArea {
+    flex-direction: column;
+  }
+
+  .sendButton {
+    width: 100%;
+  }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .contentWrapper {
+    padding: 5rem 1rem 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .addButton {
+    width: 100%;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+
+  .taskGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarCell {
+    min-height: 80px;
+    padding: 0.5rem;
+  }
+
+  .calendarDate {
+    font-size: 0.75rem;
+  }
+
+  .deletedItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .deletedActions {
+    width: 100%;
+  }
+
+  .restoreButton,
+  .permanentDeleteButton {
+    flex: 1;
+  }
+
+  .modalContent {
+    padding: 1.5rem;
+  }
+
+  .modalTitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    font-size: 0.9375rem;
+  }
+
+  .sidebarTitle {
+    font-size: 1.25rem;
+  }
+
+  .addCard {
+    min-height: 120px;
+    padding: 1.5rem 1rem;
+  }
+
+  .calendarNav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+  }
+}
+
+/* =========================
+   FLOATING CHAT BUTTON
+   ========================= */
+
+.floatingChatButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.floatingChatButton:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+  background: linear-gradient(135deg, #818cf8, #a78bfa);
+}
+
+.floatingChatButton img {
+  width: 24px;
+  height: 24px;
+}
+
+/* =========================
+   CHAT MODAL
+   ========================= */
+
+.chatModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.chatModal {
+  background: linear-gradient(to bottom, #FFF9E6 0%, #F5E6D3 100%);
+  border: 1px solid #E0D5C7;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  /* Paper texture effect */
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 30% 60%, rgba(255, 255, 255, 0.4) 0.5px, transparent 0.5px);
+  background-size: 30px 30px;
+}
+
+/* Sticky note pad header (cardboard backing) */
+.chatModal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px; /* Standard height for header */
+  background: linear-gradient(to right, #E6B980, #D4A574); /* Warmer tan/brown gradient */
+  border-radius: 8px 8px 0 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Perforated edge effect */
+.chatModal::after {
+  content: '';
+  position: absolute;
+  top: 50px; /* Adjusted to match new header height */
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: 
+    repeating-linear-gradient(
+      to right,
+      #D4A574 0,
+      #D4A574 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  z-index: 10;
+}
+
+.chatModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px; /* Reduced padding to fit within header */
+  position: relative;
+  z-index: 11; /* Above the sticky note pad header */
+  color: #2D3748; /* Dark gray text */
+  font-weight: 600; /* Semi-bold */
+  font-size: 16px; /* Specific font size */
+  border-bottom: 1px solid rgba(0,0,0,0.1); /* Darker border */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+.chatModalHeader .headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chatModalHeader .headerLeft h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2D3748;
+  margin: 0;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+}
+
+.chatModal .chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 40vh;
+  margin-top: 54px; /* Account for the sticky note pad header (50px + 4px for padding) */
+}
+
+.chatModal .welcomeMessage {
+  text-align: center;
+  padding: 1rem 0;
+  color: #e2e8f0; /* Lighter color for better visibility */
+}
+
+.chatModal .welcomeMessage h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+}
+
+.chatModal .welcomeMessage p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #94a3b8;
+}
+
+.chatModal .suggestions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.chatModal .suggestions div {
+  padding: 0.75rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.chatModal .suggestions div:hover {
+  background: rgba(99, 102, 241, 0.2);
+  transform: translateY(-1px);
+}
+
+.chatModal .chatInputArea {
+  padding: 1rem 2rem 2rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.chatModal .chatInput {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+  resize: none;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  max-height: 120px;
+  min-height: 44px;
+}
+
+.chatModal .chatInput:focus {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.chatModal .sendButton {
+  padding: 0.875rem 1.25rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.chatModal .sendButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.chatModal .sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .container::before,
+  .container::after,
+  .sidebar,
+  .sidebarHeader,
+  .nav,
+  .navLink,
+  .logoutButton,
+  .contentWrapper,
+  .taskGrid,
+  .addCard,
+  .addCardIcon,
+  .emptyState,
+  .modalOverlay,
+  .modalContent,
+  .deletedModal,
+  .error,
+  .floatingChatButton,
+  .chatModalOverlay,
+  .chatModal {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================
+   RESPONSIVE FOR CHAT MODAL
+   ========================= */
+
+@media (max-width: 768px) {
+  .floatingChatButton {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .floatingChatButton img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .chatModal {
+    max-width: 90vw;
+    max-height: 70vh;
+  }
+
+  .chatModal .chatMessages {
+    max-height: 35vh;
+  }
+
+  .chatModal .chatInputArea {
+    padding: 1rem;
+  }
+}
+

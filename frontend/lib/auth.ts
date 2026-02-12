@@ -124,7 +124,7 @@ export const authOptions: AuthOptions = {
               body: JSON.stringify({
                 email: profile.email,
                 name: profile.name,
-                google_id: profile.sub || profile.id, // Google's user ID
+                google_id: profile.sub || (profile as any).id || '', // Google's user ID
               }),
             });
 

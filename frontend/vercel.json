@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "functions": {
+    "pages/_app.tsx": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "NEXT_PUBLIC_API_URL": "$NEXT_PUBLIC_API_URL",
+    "NEXTAUTH_URL": "$NEXTAUTH_URL",
+    "NEXTAUTH_SECRET": "$NEXTAUTH_SECRET",
+    "GOOGLE_CLIENT_ID": "$GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET": "$GOOGLE_CLIENT_SECRET"
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

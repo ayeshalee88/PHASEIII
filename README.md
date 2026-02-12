@@ -85,3 +85,13 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 - `PUT /api/users/{user_id}/tasks/{task_id}` - Update a task
 - `DELETE /api/users/{user_id}/tasks/{task_id}` - Delete a task
 - `PATCH /api/users/{user_id}/tasks/{task_id}/complete` - Update task completion status
+
+## Deployment
+
+### Frontend (Vercel)
+Deploy the frontend to Vercel using the Vercel CLI or by connecting your GitHub repository.
+
+### Backend (Hugging Face Spaces)
+Deploy the backend to Hugging Face Spaces using the provided Dockerfile and space.yaml configuration.
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).

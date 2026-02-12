@@ -1,0 +1,26 @@
+spec:
+  containers:
+  - name: api
+    image: python:3.11
+    setup: |
+      pip install -r requirements.txt
+    command: |
+      python main.py
+    ports:
+    - containerPort: 8000
+      name: api
+  resources:
+    cloud: cpu
+    gpu: null
+    memory: 16Gi
+    cpu: 8
+    accelerator: null
+  secrets:
+  - DATABASE_URL
+  - SECRET_KEY
+  - ALGORITHM
+  - ACCESS_TOKEN_EXPIRE_MINUTES
+  - OPENAI_API_KEY
+  - OPENROUTER_API_KEY
+  - GROQ_API_KEY
+  - FRONTEND_URL

@@ -3,7 +3,7 @@
 // to your backend services using the JWT token from NextAuth
 
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../app/api/auth/[...nextauth]/route"; // Adjust path as needed
+import { authOptions } from "../lib/auth"; // Adjust path as needed
 
 /**
  * Example function to make an authenticated call to your FastAPI backend

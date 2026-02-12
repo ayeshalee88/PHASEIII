@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { GetServerSideProps } from 'next';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../app/api/auth/[...nextauth]/route";
+import { authOptions } from "../../lib/auth";
 import TaskCard from '../components/TaskCard';
 import TaskForm from '../components/TaskForm';
 import { apiClient } from '../lib/api';

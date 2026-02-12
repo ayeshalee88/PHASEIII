@@ -76,7 +76,7 @@ export default function SignupPage() {
 
   const handleGoogleSignup = () => {
     const signInFunc = getSignIn();
-    signInFunc("google", { callbackUrl: "/dashboard" }).then((result) => {
+    signInFunc("google", { callbackUrl: "/dashboard" }).then((result: any) => {
       if (result?.error) {
         console.error("Google signup error:", result.error);
         setError("Google signup failed. Please try again.");

@@ -48,7 +48,7 @@ export default function LoginPage() {
 
   const handleGoogleLogin = () => {
     const signInFunc = getSignIn();
-    signInFunc("google", { callbackUrl: "/dashboard" }).then((result) => {
+    signInFunc("google", { callbackUrl: "/dashboard" }).then((result: any) => {
       if (result?.error) {
         console.error("Google login error:", result.error);
         setError("Google login failed. Please try again.");

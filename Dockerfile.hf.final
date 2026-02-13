@@ -1,0 +1,29 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies required for the application
+RUN apt-get update && apt-get install -y \
+    gcc \
+    postgresql-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the combined requirements file
+COPY requirements_hf.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the backend and mcp_server directories
+COPY backend/ /app/backend/
+COPY mcp_server/ /app/mcp_server/
+
+# Create a startup script that starts both services
+RUN echo '#!/bin/bash\n\n# Start MCP server in the background on port 8001\n(\n  cd /app/mcp_server\n  python -m uvicorn server:app --host 0.0.0.0 --port 8001 --log-level info &\n) &\n\n# Wait for MCP server to start\nsleep 8\n\necho "MCP server started, starting main backend server on port 7860..."\n\n# Start the main backend server on port 7860\ncd /app/backend\nexec python -c "\nimport uvicorn\nfrom src.app import app\nprint(\"Starting FastAPI server on port 7860\")\nuvicorn.run(app, host=\"0.0.0.0\", port=7860, log_level=\"info\")\n"' > /app/start.sh
+
+# Make the startup script executable
+RUN chmod +x /app/start.sh
+
+# Expose the port required by Hugging Face Spaces
+EXPOSE 7860
+
+# Start the application using the startup script
+CMD ["/app/start.sh"]

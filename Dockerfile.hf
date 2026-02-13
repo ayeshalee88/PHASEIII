@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies required for the application
+RUN apt-get update && apt-get install -y \
+    gcc \
+    postgresql-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the combined requirements file
+COPY huggingface_requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Copy the entire project
+COPY . .
+
+# Copy and make the startup script executable
+COPY start_hf.sh /app/start_hf.sh
+RUN chmod +x /app/start_hf.sh
+
+# Expose the port required by Hugging Face Spaces
+EXPOSE 7860
+
+# Start the application using the startup script
+CMD ["/app/start_hf.sh"]

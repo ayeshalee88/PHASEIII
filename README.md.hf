@@ -1,0 +1,67 @@
+# Todo AI Chatbot Backend
+
+This is the backend for the Todo AI Chatbot application, featuring both a FastAPI server and an MCP server for AI agent integration.
+
+## Overview
+
+This repository contains:
+- **FastAPI Backend**: Handles user authentication, task management, and API endpoints
+- **MCP Server**: Provides tools for AI agents to interact with the todo system
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/signup` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/auth/refresh` - Token refresh
+
+### Task Management
+- `GET /api/users/{user_id}/tasks` - Get all tasks for a user
+- `POST /api/users/{user_id}/tasks` - Create a new task
+- `GET /api/users/{user_id}/tasks/{task_id}` - Get a specific task
+- `PUT /api/users/{user_id}/tasks/{task_id}` - Update a task
+- `DELETE /api/users/{user_id}/tasks/{task_id}` - Delete a task
+- `PATCH /api/users/{user_id}/tasks/{task_id}/complete` - Update task completion status
+
+### MCP Tools
+- `POST /api/chat` - Chat endpoint with AI agent integration
+- `POST /tools/add_task` - Add a task via MCP
+- `POST /tools/list_tasks` - List tasks via MCP
+- `POST /tools/update_task` - Update a task via MCP
+- `POST /tools/complete_task` - Complete a task via MCP
+- `POST /tools/delete_task` - Delete a task via MCP
+
+## Environment Variables
+
+This application requires the following environment variables to be set as secrets in Hugging Face Spaces:
+
+- `DATABASE_URL`: Database connection string (PostgreSQL recommended)
+- `SECRET_KEY`: Secret key for JWT tokens
+- `ALGORITHM`: Algorithm for JWT (HS256)
+- `ACCESS_TOKEN_EXPIRE_MINUTES`: Token expiration in minutes
+- `FRONTEND_URL`: URL of the deployed frontend
+- `OPENAI_API_KEY`: OpenAI API key (if using OpenAI)
+- `OPENROUTER_API_KEY`: OpenRouter API key (if using OpenRouter)
+- `GROQ_API_KEY`: Groq API key (if using Groq)
+
+## Database Configuration
+
+For production use, we recommend using a managed PostgreSQL service like:
+- [Neon](https://neon.tech/)
+- [Supabase](https://supabase.com/)
+- [Railway](https://railway.app/)
+
+For testing purposes, you can use SQLite by setting the DATABASE_URL to something like:
+`sqlite:////app/todo.db`
+
+## Deployment
+
+This application is designed to run on Hugging Face Spaces with Docker. The application will be available on port 7860 as required by Hugging Face.
+
+## Usage
+
+The backend is meant to be used with the corresponding frontend application deployed on Vercel. The frontend communicates with this backend to manage user accounts and todo lists.
+
+## MCP Integration
+
+The MCP server enables AI agents to interact with the todo system through standardized tool calls. This allows AI assistants to help users manage their tasks through natural language interactions.

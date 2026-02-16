@@ -445,6 +445,9 @@
   border-radius: 16px;
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .calendarHeader {
@@ -452,20 +455,24 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  gap: 1rem;
 }
 
 .calendarMonth {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   font-weight: 700;
   background: linear-gradient(135deg, #ffffff, #a5b4fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  flex: 1;
+  min-width: 0;
 }
 
 .calendarNav {
   width: 40px;
   height: 40px;
+  flex-shrink: 0;
   border: none;
   background: rgba(99, 102, 241, 0.2);
   color: white;
@@ -473,11 +480,18 @@
   cursor: pointer;
   font-size: 1.5rem;
   transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendarNav:hover {
   background: rgba(99, 102, 241, 0.3);
   transform: scale(1.1);
+}
+
+.calendarNav:active {
+  transform: scale(0.95);
 }
 
 .calendarGrid {
@@ -487,13 +501,14 @@
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   overflow: hidden;
+  min-width: 100%;
 }
 
 .calendarDayHeader {
   padding: 1rem;
   text-align: center;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: clamp(0.7rem, 2vw, 0.875rem);
   color: #94a3b8;
   background: rgba(15, 23, 42, 0.8);
 }
@@ -503,6 +518,8 @@
   padding: 0.75rem;
   background: rgba(15, 23, 42, 0.6);
   transition: background 0.3s;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .calendarCell:hover {
@@ -521,7 +538,7 @@
 .calendarDate {
   font-weight: 600;
   margin-bottom: 0.5rem;
-  font-size: 0.875rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
 }
 
 .calendarTasks {
@@ -533,7 +550,7 @@
 .calendarTask {
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: clamp(0.65rem, 1.8vw, 0.75rem);
   color: #1f2937;
   font-weight: 500;
   overflow: hidden;
@@ -542,11 +559,279 @@
 }
 
 .calendarMore {
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
   color: #94a3b8;
   margin-top: 0.25rem;
 }
 
+/* =========================
+   TABLET RESPONSIVE
+   ========================= */
+@media (max-width: 1024px) {
+  .calendar {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .calendarHeader {
+    margin-bottom: 1.5rem;
+  }
+
+  .calendarNav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+
+  .calendarCell {
+    min-height: 90px;
+    padding: 0.6rem;
+  }
+
+  .calendarDayHeader {
+    padding: 0.8rem;
+  }
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+  .calendar {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .calendarHeader {
+    margin-bottom: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .calendarNav {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+
+  .calendarGrid {
+    gap: 0.5px;
+  }
+
+  .calendarDayHeader {
+    padding: 0.6rem 0.3rem;
+    font-size: 0.7rem;
+  }
+
+  .calendarCell {
+    min-height: 70px;
+    padding: 0.5rem;
+  }
+
+  .calendarDate {
+    margin-bottom: 0.3rem;
+  }
+
+  .calendarTasks {
+    gap: 0.2rem;
+  }
+
+  .calendarTask {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.65rem;
+  }
+
+  .calendarMore {
+    margin-top: 0.2rem;
+  }
+}
+
+/* =========================
+   SMALL MOBILE (iPhone SE, etc)
+   ========================= */
+@media (max-width: 480px) {
+  .calendar {
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin: 0 -0.5rem; /* Extend to edges with some margin */
+  }
+
+  .calendarHeader {
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  .calendarMonth {
+    font-size: 1.1rem;
+  }
+
+  .calendarNav {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    border-radius: 6px;
+  }
+
+  .calendarGrid {
+    gap: 0.5px;
+    border-radius: 6px;
+  }
+
+  .calendarDayHeader {
+    padding: 0.5rem 0.2rem;
+    font-size: 0.65rem;
+    /* Show abbreviated day names on very small screens */
+  }
+
+  .calendarCell {
+    min-height: 60px;
+    padding: 0.4rem 0.3rem;
+  }
+
+  .calendarCell.today {
+    border: 1px solid #6366f1;
+  }
+
+  .calendarDate {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .calendarTasks {
+    gap: 0.15rem;
+  }
+
+  .calendarTask {
+    padding: 0.15rem 0.3rem;
+    font-size: 0.6rem;
+    border-radius: 3px;
+  }
+
+  .calendarMore {
+    font-size: 0.55rem;
+    margin-top: 0.15rem;
+  }
+}
+
+/* =========================
+   EXTRA SMALL MOBILE
+   ========================= */
+@media (max-width: 360px) {
+  .calendar {
+    padding: 0.6rem;
+  }
+
+  .calendarHeader {
+    margin-bottom: 0.8rem;
+  }
+
+  .calendarMonth {
+    font-size: 1rem;
+  }
+
+  .calendarNav {
+    width: 26px;
+    height: 26px;
+    font-size: 0.9rem;
+  }
+
+  .calendarDayHeader {
+    padding: 0.4rem 0.1rem;
+    font-size: 0.6rem;
+  }
+
+  .calendarCell {
+    min-height: 50px;
+    padding: 0.3rem 0.2rem;
+  }
+
+  .calendarDate {
+    font-size: 0.7rem;
+  }
+
+  .calendarTask {
+    font-size: 0.55rem;
+    padding: 0.1rem 0.25rem;
+  }
+
+  .calendarMore {
+    font-size: 0.5rem;
+  }
+}
+
+/* =========================
+   LANDSCAPE ORIENTATION
+   ========================= */
+@media (max-height: 600px) and (orientation: landscape) {
+  .calendar {
+    padding: 0.8rem;
+  }
+
+  .calendarHeader {
+    margin-bottom: 0.8rem;
+  }
+
+  .calendarCell {
+    min-height: 50px;
+    padding: 0.4rem;
+  }
+
+  .calendarDayHeader {
+    padding: 0.4rem;
+  }
+}
+
+/* =========================
+   VERY LARGE SCREENS
+   ========================= */
+@media (min-width: 1440px) {
+  .calendar {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .calendarCell {
+    min-height: 120px;
+  }
+}
+
+/* =========================
+   OPTIONAL: Compact Mobile View
+   Add this class to calendar container for ultra-compact view
+   ========================= */
+.calendar.compactMobile {
+  @media (max-width: 480px) {
+    .calendarGrid {
+      font-size: 0.7rem;
+    }
+    
+    .calendarCell {
+      min-height: 45px;
+    }
+    
+    .calendarTask {
+      display: none; /* Hide tasks, show only dots or count */
+    }
+    
+    .calendarMore {
+      display: block;
+      font-size: 0.65rem;
+    }
+  }
+}
+
+/* =========================
+   SCROLLABLE ALTERNATIVE for very small screens
+   ========================= */
+@media (max-width: 360px) {
+  .calendarWrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .calendarGrid {
+    min-width: 340px; /* Prevents squishing, allows horizontal scroll */
+  }
+}
 /* =========================
    MODAL
    ========================= */

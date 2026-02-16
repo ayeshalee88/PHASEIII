@@ -7,6 +7,7 @@
   background: #0a0a0f;
   position: relative;
   overflow: hidden;
+  padding: 20px;
 }
 
 
@@ -161,7 +162,8 @@
 
 
 .loginBox {
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
   padding: 3rem 2.6rem;
   background: linear-gradient(
     145deg,
@@ -219,7 +221,7 @@
 
 .loginBox h2 {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 700;
   text-align: center;
   margin-bottom: 0.4rem;
@@ -240,7 +242,7 @@
 .loginBox p {
   text-align: center;
   color: #9ca3af;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
   margin-bottom: 2rem;
   animation: titleEntry 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s both;
 }
@@ -263,7 +265,7 @@
 }
 
 .inputGroup label {
-  font-size: 0.88rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.88rem);
   font-weight: 500;
   color: #d1d5db;
   margin-bottom: 0.5rem;
@@ -278,9 +280,10 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(15, 23, 42, 0.6);
   color: white;
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 2.5vw, 0.95rem);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  box-sizing: border-box;
 }
 
 .inputGroup input::placeholder {
@@ -318,7 +321,7 @@
   background-size: 200% 200%;
   color: white;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(0.92rem, 2.5vw, 1rem);
   letter-spacing: 0.02em;
   cursor: pointer;
   margin-top: 0.8rem;
@@ -356,7 +359,7 @@
 .signupLink {
   text-align: center;
   margin-top: 1.8rem;
-  font-size: 0.92rem;
+  font-size: clamp(0.85rem, 2.5vw, 0.92rem);
   color: #9ca3af;
   animation: linkEntry 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.7s both;
 }
@@ -396,7 +399,7 @@
   border-radius: 10px;
   margin-bottom: 1.2rem;
   text-align: center;
-  font-size: 0.88rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.88rem);
   animation: errorShake 0.5s ease-in-out;
   backdrop-filter: blur(10px);
 }
@@ -571,32 +574,205 @@
 }
 
 
-@media (max-width: 480px) {
+.googleButton {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: clamp(0.88rem, 2.5vw, 15px);
+  font-weight: 500;
+  color: #3c4043;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.2s;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.googleButton:hover:not(:disabled) {
+  background: #f8f9fa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.googleButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 24px 0;
+  color: #64748b;
+  font-size: clamp(0.8rem, 2.5vw, 14px);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.divider span {
+  padding: 0 12px;
+  font-weight: 500;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+   ========================= */
+
+/* Tablets and smaller laptops */
+@media (max-width: 768px) {
+  .loginContainer {
+    padding: 15px;
+  }
+
   .loginBox {
-    width: 90%;
-    max-width: 380px;
-    padding: 2.4rem 2rem;
+    max-width: 400px;
+    padding: 2.5rem 2rem;
+  }
+
+  .logo {
+    width: 70px;
+    height: 70px;
   }
 
   .loginBox h2 {
-    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
   }
 
   .loginBox p {
-    font-size: 0.9rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .inputGroup {
+    margin-bottom: 1.2rem;
   }
 
   .inputGroup input {
-    padding: 0.8rem 0.9rem;
-    font-size: 0.92rem;
+    padding: 0.8rem 0.95rem;
   }
 
   .submitButton {
     padding: 0.9rem 1rem;
-    font-size: 0.95rem;
+    margin-top: 0.6rem;
+  }
+
+  .signupLink {
+    margin-top: 1.6rem;
   }
 }
 
+/* Mobile devices */
+@media (max-width: 480px) {
+  .loginContainer {
+    padding: 10px;
+  }
+
+  .loginBox {
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logoWrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .loginBox p {
+    margin-bottom: 1.5rem;
+  }
+
+  .inputGroup {
+    margin-bottom: 1rem;
+  }
+
+  .inputGroup label {
+    margin-bottom: 0.4rem;
+  }
+
+  .inputGroup input {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .submitButton {
+    padding: 0.85rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .googleButton {
+    padding: 11px;
+    gap: 10px;
+  }
+
+  .divider {
+    margin: 20px 0;
+  }
+
+  .signupLink {
+    margin-top: 1.4rem;
+  }
+
+  /* Adjust background effects for mobile */
+  .loginContainer::before {
+    width: 400px;
+    height: 400px;
+    top: -150px;
+    right: -150px;
+  }
+
+  .loginContainer::after {
+    width: 350px;
+    height: 350px;
+    bottom: -100px;
+    left: -100px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .loginBox {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .inputGroup input,
+  .submitButton,
+  .googleButton {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .divider {
+    margin: 16px 0;
+  }
+}
+
+/* Large screens - prevent the box from getting too wide */
+@media (min-width: 1440px) {
+  .loginBox {
+    max-width: 450px;
+    padding: 3.5rem 3rem;
+  }
+}
+
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .loginContainer,
   .loginContainer::before,
@@ -618,57 +794,58 @@
     transition-duration: 0.01ms !important;
   }
 }
-.googleButton {
-  width: 100%;
-  padding: 12px;
-  background: white;
-  border: 1px solid #dadce0;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  color: #3c4043;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  transition: all 0.2s;
-  margin-bottom: 20px;
-}
 
-.googleButton:hover:not(:disabled) {
-  background: #f8f9fa;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+/* Landscape orientation on mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .loginContainer {
+    padding: 10px;
+    align-items: flex-start;
+  }
 
-.googleButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+  .loginBox {
+    margin: 20px auto;
+    padding: 1.5rem 2rem;
+  }
 
-.googleIcon {
-  width: 20px;
-  height: 20px;
-}
+  .logoWrapper {
+    margin-bottom: 1rem;
+  }
 
-.divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 24px 0;
-  color: #64748b;
-  font-size: 14px;
-}
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
 
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid #e2e8f0;
-}
+  .loginBox h2 {
+    margin-bottom: 0.3rem;
+  }
 
-.divider span {
-  padding: 0 12px;
-  font-weight: 500;
-}
+  .loginBox p {
+    margin-bottom: 1rem;
+  }
 
+  .inputGroup {
+    margin-bottom: 0.8rem;
+  }
+
+  .inputGroup input {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .submitButton {
+    padding: 0.7rem 1rem;
+    margin-top: 0.4rem;
+  }
+
+  .googleButton {
+    padding: 0.6rem;
+  }
+
+  .divider {
+    margin: 12px 0;
+  }
+
+  .signupLink {
+    margin-top: 1rem;
+  }
+}

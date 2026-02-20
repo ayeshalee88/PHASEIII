@@ -1778,6 +1778,15 @@
    RESPONSIVE FOR CHAT MODAL
    ========================= */
 
+/* Large tablets */
+@media (max-width: 1024px) {
+  .chatModal {
+    max-width: 400px;
+    max-height: 75vh;
+  }
+}
+
+/* Mobile landscape + small tablets */
 @media (max-width: 768px) {
   .floatingChatButton {
     bottom: 1.5rem;
@@ -1792,16 +1801,81 @@
   }
 
   .chatModal {
-    max-width: 90vw;
-    max-height: 70vh;
+    max-width: 92vw;
+    max-height: 75vh;
+    right: 1rem;
+    bottom: 5rem;        /* space above floating button */
+    left: auto;
+    border-radius: 16px;
   }
 
   .chatModal .chatMessages {
-    max-height: 35vh;
+    max-height: 42vh;
+    padding: 0.75rem;
   }
 
   .chatModal .chatInputArea {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
+    gap: 8px;
+  }
+
+  .chatModal .chatInputArea input {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .chatModal .chatInputArea button {
+    padding: 8px 14px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .chatModal .chatHeader {
+    padding: 0.75rem 1rem;
+    font-size: 15px;
   }
 }
 
+/* Small phones */
+@media (max-width: 480px) {
+  .floatingChatButton {
+    bottom: 1rem;
+    right: 1rem;
+    width: 46px;
+    height: 46px;
+  }
+
+  .chatModal {
+    max-width: 96vw;
+    max-height: 80vh;
+    right: 0.5rem;
+    bottom: 4.5rem;
+    border-radius: 12px;
+  }
+
+  .chatModal .chatMessages {
+    max-height: 48vh;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .chatModal .chatInputArea {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .chatModal .chatInputArea input {
+    font-size: 13px;
+  }
+}
+
+/* Very small phones (iPhone SE etc.) */
+@media (max-width: 360px) {
+  .chatModal {
+    max-width: 98vw;
+    max-height: 85vh;
+    right: 0.25rem;
+  }
+
+  .chatModal .chatMessages {
+    max-height: 52vh;
+  }
+}

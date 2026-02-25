@@ -1,0 +1,83 @@
+Thank you for installing {{ .Chart.Name }}!
+
+Your release is named: {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+
+=== MINIKUBE DEPLOYMENT GUIDE ===
+
+1. BUILD AND LOAD DOCKER IMAGES INTO MINIKUBE:
+
+   # Build images locally
+   docker build -t phase3-backend:latest -f backend/Dockerfile backend/
+   docker build -t phase3-frontend:latest -f frontend/Dockerfile frontend/
+
+   # Load images into Minikube
+   eval $(minikube docker-env)
+   docker build -t phase3-backend:latest -f backend/Dockerfile backend/
+   docker build -t phase3-frontend:latest -f frontend/Dockerfile frontend/
+
+2. ACCESS THE APPLICATION:
+
+   Frontend (Next.js):
+   {{- if .Values.frontend.enabled }}
+   {{- if eq .Values.frontend.service.type "NodePort" }}
+     URL: http://$(minikube ip):{{ .Values.frontend.service.nodePort }}
+     Or run: minikube service {{ include "todochatbot.fullname" . }}-{{ .Values.frontend.name }} --url
+   {{- end }}
+   {{- end }}
+
+   Backend API (FastAPI):
+   {{- if .Values.backend.enabled }}
+     Internal URL: http://{{ include "todochatbot.fullname" . }}-{{ .Values.backend.name }}:{{ .Values.backend.service.port }}
+     Port-forward: kubectl port-forward svc/{{ include "todochatbot.fullname" . }}-{{ .Values.backend.name }} 8000:{{ .Values.backend.service.port }}
+     Then visit: http://localhost:8000
+   {{- end }}
+
+   PostgreSQL Database:
+   {{- if .Values.postgresql.enabled }}
+     Internal URL: {{ include "todochatbot.fullname" . }}-{{ .Values.postgresql.name }}:{{ .Values.postgresql.service.port }}
+     Port-forward: kubectl port-forward svc/{{ include "todochatbot.fullname" . }}-{{ .Values.postgresql.name }} 5432:{{ .Values.postgresql.service.port }}
+     Connection: postgresql://{{ .Values.postgresql.auth.username }}:{{ .Values.postgresql.auth.postgresPassword }}@localhost:5432/{{ .Values.postgresql.auth.database }}
+   {{- end }}
+
+3. USEFUL COMMANDS:
+
+   # Check pod status
+   kubectl get pods -l app.kubernetes.io/instance={{ .Release.Name }} -n {{ .Release.Namespace }}
+
+   # View logs
+   kubectl logs -l app.kubernetes.io/component=backend -n {{ .Release.Namespace }} -f
+   kubectl logs -l app.kubernetes.io/component=frontend -n {{ .Release.Namespace }} -f
+   kubectl logs -l app.kubernetes.io/component=database -n {{ .Release.Namespace }} -f
+
+   # Open frontend in browser
+   minikube service {{ include "todochatbot.fullname" . }}-{{ .Values.frontend.name }}
+
+4. ENVIRONMENT VARIABLES:
+
+   Backend:
+   - DATABASE_URL: Auto-configured from PostgreSQL service
+   - SECRET_KEY: {{ .Values.backend.env.SECRET_KEY }}
+   - ACCESS_TOKEN_EXPIRE_MINUTES: {{ .Values.backend.env.ACCESS_TOKEN_EXPIRE_MINUTES }}
+
+   Frontend:
+   - NEXT_PUBLIC_API_URL: {{ .Values.frontend.env.NEXT_PUBLIC_API_URL }}
+   - NODE_ENV: {{ .Values.frontend.env.NODE_ENV }}
+
+5. UNINSTALL:
+
+   helm uninstall {{ .Release.Name }} -n {{ .Release.Namespace }}
+
+=== DEPLOYMENT STATUS ===
+
+{{- if .Values.backend.enabled }}
+✓ Backend Service: {{ include "todochatbot.fullname" . }}-{{ .Values.backend.name }}:{{ .Values.backend.service.port }}
+{{- end }}
+{{- if .Values.frontend.enabled }}
+✓ Frontend Service: {{ include "todochatbot.fullname" . }}-{{ .Values.frontend.name }}:{{ .Values.frontend.service.port }} (NodePort: {{ .Values.frontend.service.nodePort }})
+{{- end }}
+{{- if .Values.postgresql.enabled }}
+✓ PostgreSQL Database: {{ include "todochatbot.fullname" . }}-{{ .Values.postgresql.name }}:{{ .Values.postgresql.service.port }}
+{{- end }}
+
+Happy coding! 🚀
